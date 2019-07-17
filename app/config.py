@@ -9,7 +9,6 @@ class Config:
     DEBUG = os.getenv("DEBUG", False)
 
     AUTH_USERNAME = os.environ.get("AUTH_USERNAME", "pi")
-    AUTH_PASSWORD = os.environ.get("AUTH_PASSWORD")
     AUTH_BASE64 = base64.b64encode(
         "{}:{}".format(AUTH_USERNAME, AUTH_PASSWORD).encode("utf-8")
     )
@@ -37,8 +36,7 @@ class Config:
     )
 
     def __init__(self):
-        self.TV_BACKLIGHT_DEVICE_ID = self.get_secret("TV_BACKLIGHT_DEVICE_ID")
-        self.PARTICLE_ACCESS_TOKEN = self.get_secret("PARTICLE_ACCESS_TOKEN")
+        self.AUTH_PASSWORD = self.get_secret("AUTH_PASSWORD")
 
     def get_secret(self, secret_name):
         secret_file = f"/run/secrets/{secret_name.lower()}"
