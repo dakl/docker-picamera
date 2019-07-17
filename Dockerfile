@@ -2,10 +2,11 @@ FROM resin/raspberry-pi-python:3
 
 LABEL maintainer "Philipp Schmitt <philipp@schmitt.co>"
 
-RUN READTHEDOCS=True pip install picamera
+RUN pip install picamera
 
-COPY web_streaming.py /web_streaming.py
+COPY app /app
+WORKDIR /app
 
-ENV AUTH_USERNAME=pi AUTH_PASSWORD=picamera RESOLUTION=800x600 FRAMERATE=24
+ENV AUTH_USERNAME=pi RESOLUTION=800x600 FRAMERATE=24
 
-ENTRYPOINT ["/usr/local/bin/python", "/web_streaming.py"]
+ENTRYPOINT ["/usr/local/bin/python", "/app/run.py"]
