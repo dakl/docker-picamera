@@ -9,10 +9,6 @@ class Config:
     DEBUG = os.getenv("DEBUG", False)
 
     AUTH_USERNAME = os.environ.get("AUTH_USERNAME", "pi")
-    AUTH_BASE64 = base64.b64encode(
-        "{}:{}".format(AUTH_USERNAME, AUTH_PASSWORD).encode("utf-8")
-    )
-    BASIC_AUTH = "Basic {}".format(AUTH_BASE64.decode("utf-8"))
     RESOLUTION = os.environ.get("RESOLUTION", "800x600").split("x")
     RESOLUTION_X = int(RESOLUTION[0])
     RESOLUTION_Y = int(RESOLUTION[1])
@@ -34,6 +30,16 @@ class Config:
     """.format(
         RESOLUTION_X, RESOLUTION_Y
     )
+
+    @property
+    def AUTH_BASE64(self):
+        return base64.b64encode(
+            "{}:{}".format(self.AUTH_USERNAME, self.AUTH_PASSWORD).encode("utf-8")
+        )
+
+    @property
+    def BASIC_AUTH(self):
+        return "Basic {}".format(self.AUTH_BASE64.decode("utf-8"))
 
     def __init__(self):
         self.AUTH_PASSWORD = self.get_secret("AUTH_PASSWORD")
