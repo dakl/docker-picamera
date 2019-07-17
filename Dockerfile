@@ -1,8 +1,7 @@
-FROM resin/raspberry-pi-python:3
+FROM dakl/arm32-python-alpine-qemu:3.7.1-slim
 
-LABEL maintainer "Philipp Schmitt <philipp@schmitt.co>"
-
-RUN pip install picamera
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 COPY app /app
 WORKDIR /app
