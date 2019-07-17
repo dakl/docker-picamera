@@ -1,4 +1,4 @@
-FROM dakl/arm32-python-alpine-qemu:3.7.1-slim
+FROM resin/raspberry-pi-python:3
 
 ENV READTHEDOCS=True
 COPY requirements.txt /tmp/requirements.txt
