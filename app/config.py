@@ -42,7 +42,7 @@ class Config:
         return "Basic {}".format(self.AUTH_BASE64.decode("utf-8"))
 
     def __init__(self):
-        self.AUTH_PASSWORD = self.get_secret("AUTH_PASSWORD")
+        self.AUTH_PASSWORD = self.get_secret("PICAM_PASSWORD")
 
     def get_secret(self, secret_name):
         secret_file = f"/run/secrets/{secret_name.lower()}"
